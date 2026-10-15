@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AK NAS LIMITED</title>
+    <title>AK NASS LIMITED</title>
 
-    <meta name="description" content="AK NAS LIMITED offers POS services, ATM card services and loan application assistance in Nasarawa State, Nigeria.">
+    <meta name="description" content="AK NASS LIMITED offers POS services, ATM card services and loan application assistance in Nasarawa State, Nigeria.">
 
     <style>
         * {
@@ -282,13 +282,88 @@
                 font-size: 25px;
             }
         }
+
+        /* Short welcome screen */
+        #welcome-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg, #064e3b, #087f5b);
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #welcome-screen.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-message {
+            max-width: 520px;
+        }
+
+        .welcome-message h2 {
+            font-size: clamp(26px, 5vw, 38px);
+            margin-bottom: 10px;
+        }
+
+        .welcome-message p {
+            color: #e2f6f7;
+            font-size: 16px;
+        }
+
+        .welcome-loader {
+            width: 180px;
+            height: 5px;
+            margin: 22px auto 0;
+            overflow: hidden;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.25);
+        }
+
+        .welcome-loader span {
+            display: block;
+            width: 40%;
+            height: 100%;
+            border-radius: 10px;
+            background: white;
+            animation: welcome-loading 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes welcome-loading {
+            from { transform: translateX(0); }
+            to { transform: translateX(150%); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #welcome-screen { transition: none; }
+            .welcome-loader span { animation: none; }
+        }
+
     </style>
 </head>
 
 <body>
 
+    <div id="welcome-screen" role="status" aria-live="polite">
+        <div class="welcome-message">
+            <h2>Welcome to AK NASS LIMITED</h2>
+            <p>Your Trusted Financial Services Partner</p>
+            <p>Loading your website...</p>
+            <div class="welcome-loader" aria-hidden="true"><span></span></div>
+        </div>
+    </div>
+
     <header>
-        <h1>AK NAS LIMITED</h1>
+        <h1>AK NASS LIMITED</h1>
         <p>Your Trusted Financial Services Partner</p>
         <p class="header-tagline">
             Reliable support for your everyday financial needs
@@ -307,7 +382,7 @@
         <h2>Simple Support for Your Everyday Financial Needs</h2>
 
         <p>
-            Welcome to AK NAS LIMITED. We help customers make enquiries
+            Welcome to AK NASS LIMITED. We help customers make enquiries
             about Moniepoint POS terminals, ATM card services and loan
             application assistance.
         </p>
@@ -328,7 +403,7 @@
         <div class="services">
 
             <div class="service-card">
-                <img src="wave.jpg" alt="Moniepoint POS terminal">
+                <img src="images/pos.jpg" alt="Moniepoint POS terminal">
 
                 <h3>Moniepoint POS Services</h3>
 
@@ -346,7 +421,7 @@
             </div>
 
             <div class="service-card">
-                <img src="atm-card.jpg" alt="ATM card services">
+                <img src="images/atm-card.jpg" alt="ATM card services">
 
                 <h3>ATM Card Services</h3>
 
@@ -364,7 +439,7 @@
             </div>
 
             <div class="service-card">
-                <img src="loan.jpg" alt="Loan application assistance">
+                <img src="images/loan.jpg" alt="Loan application assistance">
 
                 <h3>Loan Application Assistance</h3>
 
@@ -385,11 +460,11 @@
     </section>
 
     <section id="about">
-        <h2 class="section-title">About AK NAS LIMITED</h2>
+        <h2 class="section-title">About AK NASS LIMITED</h2>
 
         <div class="info-card">
             <p>
-                AK NAS LIMITED is committed to helping customers
+                AK NASS LIMITED is committed to helping customers
                 access information and assistance relating to our
                 financial service offerings.
             </p>
@@ -478,12 +553,26 @@
     </section>
 
     <footer>
-        <p><strong>AK NAS LIMITED</strong></p>
+        <p><strong>AK NASS LIMITED</strong></p>
         <p>Your Trusted Financial Services Partner</p>
         <p class="footer-small">
-            &copy; 2026 AK NAS LIMITED. All rights reserved.
+            &copy; 2026 AK NASS LIMITED. All rights reserved.
         </p>
     </footer>
 
+    <script>
+        // Hide the welcome screen automatically after 2 seconds.
+        window.addEventListener("load", function () {
+            window.setTimeout(function () {
+                var welcomeScreen = document.getElementById("welcome-screen");
+                if (welcomeScreen) {
+                    welcomeScreen.classList.add("hide");
+                    window.setTimeout(function () {
+                        welcomeScreen.remove();
+                    }, 600);
+                }
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
